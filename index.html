@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para Mamá y Papá</title>
+  <meta name="description" content="Un regalo: poemas y recuerdos para Mamá y Papá." />
+
+  <style>
+    :root{
+      /* Paleta elegante: Azul marino + Blanco + Naranja */
+      --navy0:#05070d;
+      --navy1:#081122;
+      --navy2:#0b1c38;
+
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.13);
+
+      --text:#f7f8ff;
+      --muted: rgba(247,248,255,.74);
+      --soft: rgba(247,248,255,.60);
+
+      --accent:#ff8a1f;        /* Naranja elegante */
+      --accent2:#4fc3f7;       /* Azul suave (detalle sutil) */
+      --white:#ffffff;
+
+      --shadow: 0 18px 55px rgba(0,0,0,.58);
+      --shadow2: 0 10px 26px rgba(0,0,0,.35);
+
+      --r-xl: 26px;
+      --r-lg: 20px;
+      --r-md: 16px;
+      --r-sm: 12px;
+
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body { height: 100%; }
+
+    body{
+      margin:0;
+      color: var(--text);
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      background:
+        radial-gradient(900px 420px at 18% 10%, rgba(79,195,247,.13), transparent 60%),
+        radial-gradient(1000px 520px at 60% 95%, rgba(255,138,31,.14), transparent 65%),
+        linear-gradient(155deg, var(--navy0), var(--navy1) 45%, var(--navy2));
+      overflow-x: hidden;
+    }
+
+    /* Tipografía combinada (serif elegante + sans en UI) */
+    .ui{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 26px 18px 54px; }
+
+    /* Grano suave */
+    .grain{
+      position: fixed;
+      inset: -40%;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      opacity: .07;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+      animation: drift 10s linear infinite;
+      z-index: 0;
+    }
+    @keyframes drift{
+      0%{ transform: translate3d(0,0,0) rotate(0deg); }
+      100%{ transform: translate3d(4%, -3%, 0) rotate(6deg); }
+    }
+
+    header{
+      position: relative;
+      z-index: 1;
+      padding: 8px 0 18px;
+      text-align: center;
+    }
+
+    .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,.22);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(10px);
+      user-select: none;
+    }
+    .pill .dot{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255,138,31,.12);
+    }
+
+    .title{
+      margin: 16px 0 8px;
+      font-size: clamp(34px, 4.4vw, 56px);
+      letter-spacing: .2px;
+      line-height: 1.06;
+      text-transform: none;
+    }
+
+    .subtitle{
+      margin: 0 auto;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .hero-actions{
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+    button:hover{ background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.20); }
+    button:active{ transform: scale(.98); }
+
+    .grid{
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(600px 240px at 16% 0%, rgba(79,195,247,.10), transparent 62%),
+        radial-gradient(720px 280px at 88% 0%, rgba(255,138,31,.10), transparent 62%);
+      pointer-events:none;
+      z-index: 0;
+    }
+
+    .cardhead{
+      position: relative;
+      z-index: 1;
+      padding: 18px 18px 12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .who{ display:flex; flex-direction:column; gap: 7px; }
+    .who .name{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: .2px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+      text-transform: none;
+    }
+    .who .line{
+      margin:0;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.55;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+
+    .badge-age{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 9px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.82);
+      font-size: 12.5px;
+      white-space: nowrap;
+      user-select:none;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+    .badge-age .spark{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255,138,31,.10);
+    }
+
+    .poem{
+      position: relative;
+      z-index: 1;
+      padding: 0 18px 18px;
+      display:grid;
+      gap: 12px;
+    }
+
+    .block{
+      padding: 18px 16px;
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .block .cap{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      color: rgba(255,255,255,.72);
+      font-size: 12.5px;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+      user-select: none;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+
+    .cap .orb{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 6px rgba(79,195,247,.10);
+      flex: 0 0 auto;
+    }
+
+    .block p{
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.78;
+      letter-spacing: .10px;
+      color: rgba(247,248,255,.93);
+    }
+
+    /* Galería */
+    .full{
+      position: relative;
+      z-index: 1;
+      margin-top: 16px;
+    }
+
+    .gallery-card{ padding: 18px; }
+
+    .gallery-top{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .gallery-top h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.2px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+
+    .gallery-top p{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.55;
+      max-width: 80ch;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .chip{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.80);
+      font-size: 12.5px;
+      cursor: pointer;
+      user-select: none;
+      transition: background .2s ease, border-color .2s ease, transform .08s ease;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+    .chip:hover{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+    .chip:active{ transform: scale(.98); }
+    .chip.active{
+      border-color: rgba(255,138,31,.55);
+      background: rgba(255,138,31,.10);
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (min-width: 720px){
+      .gallery{ grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    .shot{
+      position: relative;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      cursor: pointer;
+      transform: translateZ(0);
+      transition: transform .18s ease, border-color .2s ease, filter .2s ease;
+      min-height: 175px;
+    }
+    .shot:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.22);
+      filter: brightness(1.04);
+    }
+    .shot img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.03);
+    }
+    .shot.contain img{
+      object-fit: contain;
+      background: rgba(0,0,0,.25);
+      transform: none;
+  }
+
+    .shot .label{
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      right: 10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.34);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.88);
+      font-size: 13px;
+      line-height: 1.35;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+
+    /* Cierre */
+    .closing{ margin-top: 16px; }
+    .closing .block small{
+      display:block;
+      margin-top: 12px;
+      color: rgba(255,255,255,.70);
+      font-size: 12.8px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+
+    footer{
+      position: relative;
+      z-index: 1;
+      margin-top: 18px;
+      text-align: center;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      line-height: 1.6;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+
+    /* Entrada */
+    .fade-in{ opacity: 0; transform: translateY(10px); animation: up .7s ease forwards; }
+    .d1{ animation-delay: .05s; }
+    .d2{ animation-delay: .12s; }
+    .d3{ animation-delay: .20s; }
+    .d4{ animation-delay: .28s; }
+    @keyframes up{ to { opacity: 1; transform: translateY(0); } }
+
+    /* Lightbox */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 50;
+    }
+    .lightbox.open{ display:flex; }
+
+    .lb-inner{
+      width: min(980px, 100%);
+      background: rgba(6,10,20,.62);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 22px;
+      box-shadow: 0 25px 80px rgba(0,0,0,.65);
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .lb-top{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .lb-title{
+      color: rgba(255,255,255,.84);
+      font-size: 13px;
+      letter-spacing: .25px;
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+      user-select:none;
+    }
+
+    .lb-actions{ display:flex; gap: 8px; align-items:center; }
+
+    .iconbtn{
+      width: 40px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform .08s ease, background .2s ease;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    }
+    .iconbtn:hover{ background: rgba(255,255,255,.08); }
+    .iconbtn:active{ transform: scale(.98); }
+
+    .lb-media{
+      width: 100%;
+      background: rgba(0,0,0,.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .lb-media img{
+      width: 100%;
+      height: min(70vh, 640px);
+      object-fit: contain;
+      display:block;
+      background: rgba(0,0,0,.35);
+    }
+
+    /* Print */
+    @media print{
+      .grain, .hero-actions, .chips, .lightbox { display:none !important; }
+      body{ background: #fff; color:#000; }
+      .card, .block{ box-shadow: none; }
+      .card{ border: 1px solid #ddd; background: #fff; }
+      .block{ border: 1px solid #eee; background: #fff; }
+      .block p{ color:#111; }
+      .who .line, .subtitle, footer{ color:#333 !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header class="fade-in d1">
+      <div class="pill ui" aria-label="Dedicatoria">
+        <div class="dot" aria-hidden="true"></div>
+        <div>Un regalo hecho con amor</div>
+      </div>
+
+      <h1 class="title">Para Mamá y Papá</h1>
+      <p class="subtitle ui">
+        Esto no intenta devolverles todo. Solo quiere decirles algo sencillo:
+        gracias por ser casa, impulso y abrigo. Aquí están mis palabras para ustedes.
+      </p>
+
+      <div class="hero-actions">
+        <button onclick="document.getElementById('mami').scrollIntoView({behavior:'smooth'})">Ir a Mamá</button>
+        <button onclick="document.getElementById('papi').scrollIntoView({behavior:'smooth'})">Ir a Papá</button>
+        <button onclick="document.getElementById('fotos').scrollIntoView({behavior:'smooth'})">Ver Fotos</button>
+        <button onclick="window.print()">Imprimir / Guardar PDF</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- MAMÁ -->
+      <section id="mami" class="card fade-in d2" aria-label="Poema para Mamá">
+        <div class="cardhead">
+          <div class="who">
+            <h2 class="name">Para Mamá</h2>
+            <p class="line">
+              50 años y se ve mucho más joven: una vida muy bella que se nota en su manera de amar.
+            </p>
+          </div>
+          <div class="badge-age"><span class="spark" aria-hidden="true"></span>50 Años</div>
+        </div>
+
+        <div class="poem">
+          <div class="block">
+            <div class="cap"><span class="orb" aria-hidden="true"></span>Poema</div>
+            <p>
+              Mamá,<br><br>
+              tú tienes una memoria especial:<br>
+              la de los momentos bonitos.<br>
+              Guardas risas, palabras y gestos<br>
+              como quien sabe que el amor también se recuerda.<br><br>
+
+              Hay algo encantador en escucharte decir “Don Gordon”,<br>
+              es una ternura que no se explica,<br>
+              un nombre que me devuelve a casa<br>
+              sin importar cuán lejos esté.<br><br>
+
+              Cumples 50 años,<br>
+              pero no pesan:<br>
+              son 50 años de una vida muy bella,<br>
+              de amor dado sin medida,<br>
+              de cuidado constante,<br>
+              de una juventud que no está en la edad<br>
+              sino en la manera de querer.<br><br>
+
+              Eres increíble, mami.<br>
+              Gracias por consentirme,<br>
+              por mimarme sin razón,<br>
+              por hacerme sentir querido incluso en silencio.<br>
+              Gracias por ser tú,<br>
+              siempre.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAPÁ -->
+      <section id="papi" class="card fade-in d2" aria-label="Poema para Papá">
+        <div class="cardhead">
+          <div class="who">
+            <h2 class="name">Para Papá</h2>
+            <p class="line">55 años: la edad de alguien que sigue rompiendo la historia.</p>
+          </div>
+          <div class="badge-age"><span class="spark" aria-hidden="true"></span>55 Años</div>
+        </div>
+
+        <div class="poem">
+          <div class="block">
+            <div class="cap"><span class="orb" aria-hidden="true"></span>Poema</div>
+            <p>
+              Papá,<br><br>
+              desde chiquito fuiste un luchador,<br>
+              y con el tiempo demostraste<br>
+              que eras el más grande luchador del mundo.<br><br>
+
+              No heredaste caminos:<br>
+              los construiste.<br>
+              Creaste tu propio imperio<br>
+              con trabajo, constancia y coraje.<br>
+              Nuestra imprenta no es solo un negocio,<br>
+              es historia hecha con tus manos.<br><br>
+
+              Hoy cumples 55 años,<br>
+              la edad de alguien que no se detiene,<br>
+              de alguien que sigue rompiendo la historia<br>
+              en lugar de mirarla desde atrás.<br><br>
+
+              Para nosotros eres un superhéroe,<br>
+              no por capas ni poderes,<br>
+              sino por presencia,<br>
+              por ejemplo,<br>
+              por fortaleza.<br><br>
+
+              Me siento bendecida cada vez que te veo.<br>
+              Y es algo simplemente genial<br>
+              poder decir con orgullo<br>
+              que eres mi papá.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- GALERÍA -->
+    <section id="fotos" class="card full fade-in d3" aria-label="Galería de Fotos">
+      <div class="gallery-card">
+        <div class="gallery-top">
+          <div>
+            <h2 class="ui">Seis Recuerdos</h2>
+            <p class="ui">
+              Toca una foto para verla en grande. Las etiquetas describen lo que me contaste de cada una.
+            </p>
+
+            <div class="chips" aria-label="Filtros de la galería">
+              <div class="chip active" data-filter="all">Todas</div>
+              <div class="chip" data-filter="familia">Familia</div>
+              <div class="chip" data-filter="mami-papi">Mami &amp; Papi</div>
+              <div class="chip" data-filter="papi-yo">Con Andrés</div>
+            </div>
+          </div>
+
+          <div class="badge-age ui"><span class="spark" aria-hidden="true"></span>Fotos</div>
+        </div>
+
+        <div class="gallery">
+          <!-- mami1: papá-mamá y yo en el medio -->
+          <div class="shot" data-src="img/mami1.jpeg" data-title="Familia" data-tags="familia">
+            <img src="img/mami1.jpeg" alt="Papá, Mamá y Andrés">
+            <div class="label">Papá, Mamá y Andrés</div>
+          </div>
+
+          <!-- mami2: mami y papi -->
+          <div class="shot" data-src="img/mami2.jpeg" data-title="Mami &amp; Papi" data-tags="mami-papi">
+            <img src="img/mami2.jpeg" alt="Mamá y papá juntos">
+            <div class="label">Mami &amp; Papi</div>
+          </div>
+
+          <!-- mami3: papi a la izquierda, papi en el centro y yo a la derecha -->
+          <div class="shot" data-src="img/mami3.jpeg" data-title="Con Andrés" data-tags="papi-yo">
+            <img src="img/mami3.jpeg" alt="Papá, Mamá y Andrés">
+            <div class="label">Papá, Mamá y Andrés</div>
+          </div>
+
+          <!-- papi1: papi, mami -->
+          <div class="shot" data-src="img/papi1.jpeg" data-title="Mami &amp; Papi" data-tags="mami-papi">
+            <img src="img/papi1.jpeg" alt="Papá y Mamá">
+            <div class="label">Papi &amp; Mami</div>
+          </div>
+
+          <!-- papi3: FAM -->
+          <div class="shot contain" data-src="img/papi3.jpeg" data-title="Familia" data-tags="familia">
+            <img src="img/papi3.jpeg" alt="Familia">
+            <div class="label">Familia</div>
+          </div>
+
+          <!-- papi2: papi y mami -->
+          <div class="shot" data-src="img/papi2.jpeg" data-title="Mami &amp; Papi" data-tags="mami-papi">
+            <img src="img/papi2.jpeg" alt="Papá y mamá juntos">
+            <div class="label">Papi &amp; Mami</div>
+          </div>
+
+      
+        </div>
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section class="card closing fade-in d4" aria-label="Cierre">
+      <div class="cardhead">
+        <div class="who">
+          <h2 class="name">Un Cierre</h2>
+          <p class="line">Para leerlo juntos, cuando quieran. Sin prisa.</p>
+        </div>
+        <div class="badge-age"><span class="spark" aria-hidden="true"></span>Gracias</div>
+      </div>
+
+      <div class="poem">
+        <div class="block">
+          <div class="cap"><span class="orb" aria-hidden="true"></span>Mensaje</div>
+          <p>
+            No hay regalo que alcance para devolverles todo.<br>
+            Pero aquí va mi promesa: voy a cuidar lo que me dieron,<br>
+            y a honrarlo con mi vida.
+          </p>
+          <small>— Con amor, Holmazán</small>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-inner" role="dialog" aria-label="Vista de imagen">
+      <div class="lb-top">
+        <p class="lb-title" id="lbTitle">Foto</p>
+        <div class="lb-actions">
+          <button class="iconbtn" id="prevBtn" aria-label="Anterior">‹</button>
+          <button class="iconbtn" id="nextBtn" aria-label="Siguiente">›</button>
+          <button class="iconbtn" id="closeBtn" aria-label="Cerrar">×</button>
+        </div>
+      </div>
+      <div class="lb-media">
+        <img id="lbImg" src="" alt="Imagen ampliada">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const shots = Array.from(document.querySelectorAll('.shot'));
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const closeBtn = document.getElementById('closeBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    let visibleShots = shots.slice();
+
+    let idx = 0;
+
+    function openAt(i){
+      idx = i;
+      const el = visibleShots[idx];
+      const src = el.getAttribute('data-src');
+      const title = el.getAttribute('data-title') || 'Foto';
+      lbImg.src = src;
+      lbTitle.textContent = title + ' — ' + (idx + 1) + ' / ' + visibleShots.length;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb(){
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    function next(){
+      if (!visibleShots.length) return;
+      openAt((idx + 1) % visibleShots.length);
+    }
+
+    function prev(){
+      if (!visibleShots.length) return;
+      openAt((idx - 1 + visibleShots.length) % visibleShots.length);
+    }
+
+    // Click en fotos
+    shots.forEach((el) => {
+      el.addEventListener('click', () => {
+        const current = visibleShots.indexOf(el);
+        if (current >= 0) openAt(current);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLb);
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) closeLb();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    // Filtros
+    function setFilter(tag){
+      chips.forEach(c => c.classList.remove('active'));
+      const chip = chips.find(c => c.getAttribute('data-filter') === tag);
+      if (chip) chip.classList.add('active');
+
+      visibleShots = [];
+      shots.forEach(el => {
+        const tags = (el.getAttribute('data-tags') || '').split(' ').filter(Boolean);
+        const show = (tag === 'all') ? true : tags.includes(tag);
+        el.style.display = show ? '' : 'none';
+        if (show) visibleShots.push(el);
+      });
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        setFilter(chip.getAttribute('data-filter'));
+      });
+    });
+  </script>
+</body>
+</html>
